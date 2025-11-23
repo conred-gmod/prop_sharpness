@@ -902,7 +902,13 @@ do
             if not model then return end -- someone reported this as a bug once and now im paranoid
 
             model = string_lowerCreated( model )
-            local sharpData = PROP_SHARPNESS.ModelData[model]
+            local modelData = PROP_SHARPNESS.ModelData
+            if not modelData then
+                gobble() -- evil error
+                modelData = PROP_SHARPNESS.ModelData
+
+            end
+            local sharpData = modelData[model]
             if not sharpData then return end
 
             ent.sharpness_NextDealDamage = 0
